@@ -1,8 +1,12 @@
 import { Names } from "@/models/NamesModel";
 
+export interface NamesState {
+  names: Names[];
+}
+
 export default {
   namespaced: true,
-  state: {
+  state: (): NamesState => ({
     names: [
       {
         id: 1,
@@ -113,7 +117,7 @@ export default {
         picked: false,
       },
     ] as Names[],
-  },
+  }),
   getters: {},
   actions: {},
   mutations: {},
