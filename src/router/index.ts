@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import NamesView from "../views/NamesView.vue";
+import NamesView from "@/views/NamesView.vue";
+import JokesView from "@/views/JokesView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -10,8 +11,9 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/random-jokes",
     name: "randomJokes",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/JokesView.vue"),
+    component: JokesView,
+    // component: () =>
+    //   import(/* webpackChunkName: "about" */ "../views/JokesView.vue"),
   },
 ];
 
