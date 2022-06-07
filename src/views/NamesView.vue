@@ -1,22 +1,15 @@
 <template>
   <div class="names-view">
-    <h1>Names</h1>
-    <ul>
-      <li v-for="{ id, name, surname } in names.names" :key="id">
-        {{ name }} {{ surname }}
-      </li>
-    </ul>
+    <NamesRandomizer />
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from "vue";
-import { mapState } from "vuex";
+import NamesRandomizer from "@/components/NamesRandomizer/NamesRandomizer.vue";
 
 export default defineComponent({
   name: "NamesView",
-  computed: {
-    ...mapState(["names"]),
-  },
+  components: { NamesRandomizer },
 });
 </script>
