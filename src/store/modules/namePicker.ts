@@ -1,9 +1,4 @@
-export type Names = {
-  id: number;
-  name: string;
-  surname: string;
-  picked: boolean;
-};
+import { Names } from "@/models/NamesModel";
 
 export default {
   namespaced: true,
