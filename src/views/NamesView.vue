@@ -2,7 +2,7 @@
   <div class="names-view">
     <h1>Names</h1>
     <ul>
-      <li v-for="{ id, name, surname } in namePicker.names" :key="id">
+      <li v-for="{ id, name, surname } in names.names" :key="id">
         {{ name }} {{ surname }}
       </li>
     </ul>
@@ -16,7 +16,7 @@ import { mapState } from "vuex";
 export default defineComponent({
   name: "NamesView",
   computed: {
-    ...mapState(["namePicker"]),
+    ...mapState(["names"]),
   },
 });
 </script>
