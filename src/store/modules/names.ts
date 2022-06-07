@@ -107,7 +107,7 @@ export default {
       {
         id: 18,
         name: "Rihards",
-        surname: "Hanriot Karlauskis",
+        surname: "Karlauskis",
         picked: false,
       },
       {
