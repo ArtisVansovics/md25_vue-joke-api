@@ -140,19 +140,21 @@ export default {
   mutations: {
     selectNewName(state: NamesState) {
       const unselectedNames = state.names.filter((name) => !name.picked);
+
       const randomName =
         unselectedNames[Math.floor(Math.random() * unselectedNames.length)];
+
       randomName.picked = true;
+
       state.selectedName = randomName;
     },
     selectRandomName(state: NamesState) {
       const notPreviousNames = state.names.filter(
         (name) => name.id !== state.selectedName.id
       );
-      const randomName =
+
+      state.selectedName =
         notPreviousNames[Math.floor(Math.random() * notPreviousNames.length)];
-      randomName.picked = true;
-      state.selectedName = randomName;
     },
   },
 };
