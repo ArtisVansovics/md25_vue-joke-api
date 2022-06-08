@@ -1,4 +1,4 @@
-export type Names = {
+export type Name = {
   id: number;
   name: string;
   surname: string;

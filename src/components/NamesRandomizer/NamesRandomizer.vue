@@ -1,27 +1,32 @@
 <template>
   <div class="container">
     <div class="names-box">
-      <p v-for="{ id, name, surname } in names.names" :key="id">
+      <p v-for="{ id, name, surname } in notSelected" :key="id">
         {{ name }} {{ surname }}
       </p>
     </div>
     <div class="result-box">
       <p></p>
     </div>
-    <ButtonPrimary>Random name</ButtonPrimary>
+    <ButtonPrimary>Select random name</ButtonPrimary>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import ButtonPrimary from "@/components/ButtonPrimary/ButtonPrimary.vue";
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 
 export default defineComponent({
   name: "NamesRandomizer",
   components: { ButtonPrimary },
   computed: {
-    ...mapState(["names"]),
+    ...mapState("names", {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      names: (state) => state.names,
+    }),
+    ...mapGetters("names", ["notSelected"]),
   },
 });
 </script>
