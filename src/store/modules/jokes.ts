@@ -16,13 +16,13 @@ export default {
     data: {} as JokesData,
   }),
   getters: {
-    data: (state: JokesState) => state.data,
+    jokesData: (state: JokesState) => state.data,
   },
   actions: {
     async getData({ commit }: { commit: Commit }) {
       try {
         const data = await axios.get(
-          "https://v2.jokeapi.dev/joke/Programming?type=single&amount=10"
+          "https://v2.jokeapi.dev/joke/Programming?type=single&amount=9"
         );
         commit("setData", data.data);
       } catch (error) {
