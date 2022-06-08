@@ -1,0 +1,11 @@
+.card {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 15px;
+  padding: 20px 30px;
+  border-radius: 5px;
+  background-color: #012E40;
+  color: #F2E7AC;
+}
