@@ -2,7 +2,9 @@
   <div class="container">
     <JokesCard v-for="{ joke, id } in jokes" :key="id">
       <p>{{ joke }}</p>
-      <ButtonPrimary>More details</ButtonPrimary>
+      <RouterLink :to="{ name: 'joke', params: { id: id } }">
+        <ButtonPrimary>More details</ButtonPrimary>
+      </RouterLink>
     </JokesCard>
   </div>
 </template>
