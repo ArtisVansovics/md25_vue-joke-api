@@ -1,30 +1,43 @@
-import { JokesData } from "@/models/JokesModel";
+import { JokeData, JokesData } from "@/models/JokesModel";
 import { ActionContext } from "vuex";
 import { RootState } from "@/store";
-import { Commit } from "vuex";
 import axios from "axios";
 
 export interface JokesState {
   data: JokesData;
+  dataSingle: JokeData;
 }
 
 type Context = ActionContext<JokesState, RootState>;
 
 export default {
   namespaced: true,
-  state: (): JokesState => ({
+  state: {
     data: {} as JokesData,
-  }),
+    dataSingle: {} as JokeData,
+  },
   getters: {
     jokesData: (state: JokesState) => state.data,
+    jokeData: (state: JokesState) => state.dataSingle,
   },
   actions: {
-    async getData({ commit }: { commit: Commit }) {
+    async getData(context: Context) {
       try {
         const data = await axios.get(
           "https://v2.jokeapi.dev/joke/Programming?type=single&amount=9"
         );
-        commit("setData", data.data);
+        context.commit("setData", data.data);
+      } catch (error) {
+        alert(error);
+        console.log(error);
+      }
+    },
+    async getSingleData(context: Context, id: number) {
+      try {
+        const data = await axios.get(
+          `https://v2.jokeapi.dev/joke/Any?idRange=${id}`
+        );
+        context.commit("setDataSingle", data.data);
       } catch (error) {
         alert(error);
         console.log(error);
@@ -41,8 +54,11 @@ export default {
     // },
   },
   mutations: {
-    setData(state: JokesState, data: JokesData): void {
+    setData(state: JokesState, data: JokesData) {
       state.data = data;
+    },
+    setDataSingle(state: JokesState, dataSingle: JokeData) {
+      state.dataSingle = dataSingle;
     },
   },
 };
