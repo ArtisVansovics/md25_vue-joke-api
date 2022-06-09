@@ -1,11 +1,23 @@
 <template>
   <div class="container">
-    <JokesCard v-for="{ joke, id } in jokes" :key="id">
-      <p>{{ joke }}</p>
-      <RouterLink :to="{ name: 'joke', params: { id: id } }">
-        <ButtonPrimary>More details</ButtonPrimary>
-      </RouterLink>
-    </JokesCard>
+    <div class="row">
+      <button
+        v-for="{ value, name } in filterButtons"
+        :class="['filter-button', filterFlag === value ? 'selected' : '']"
+        @click="setFilter(value)"
+        :key="value"
+      >
+        {{ name }}
+      </button>
+    </div>
+    <div class="card-box">
+      <JokesCard v-for="{ joke, id } in jokesFilter(filterFlag)" :key="id">
+        <p>{{ joke }}</p>
+        <RouterLink :to="{ name: 'joke', params: { id: id } }" class="link">
+          <ButtonPrimary>More details</ButtonPrimary>
+        </RouterLink>
+      </JokesCard>
+    </div>
   </div>
 </template>
 
@@ -15,9 +27,56 @@ import JokesCard from "@/components/JokesCard/JokesCard.vue";
 import { mapGetters, mapState } from "vuex";
 import ButtonPrimary from "@/components/ButtonPrimary/ButtonPrimary.vue";
 
+type FilterButton = {
+  value: Filter;
+  name: string;
+};
+
+type Filter =
+  | "all"
+  | "nsfw"
+  | "religious"
+  | "political"
+  | "racist"
+  | "sexist"
+  | "explicit";
+
 export default defineComponent({
   name: "JokesContainer",
   components: { ButtonPrimary, JokesCard },
+  data: () => ({
+    filterFlag: "all" as Filter,
+    filterButtons: [
+      {
+        value: "all",
+        name: "ALL",
+      },
+      {
+        value: "nsfw",
+        name: "NSFW",
+      },
+      {
+        value: "religious",
+        name: "RELIGIOUS",
+      },
+      {
+        value: "political",
+        name: "POLITICAL",
+      },
+      {
+        value: "racist",
+        name: "RACIST",
+      },
+      {
+        value: "sexist",
+        name: "SEXIST",
+      },
+      {
+        value: "explicit",
+        name: "EXPLICIT",
+      },
+    ] as FilterButton[],
+  }),
   mounted() {
     this.$store.dispatch("jokes/getData");
   },
@@ -27,7 +86,12 @@ export default defineComponent({
       // @ts-ignore
       jokes: (state) => state.data.jokes,
     }),
-    ...mapGetters("jokes", ["jokesData"]),
+    ...mapGetters("jokes", ["jokesData", "jokesFilter"]),
+  },
+  methods: {
+    setFilter(filterValue: Filter) {
+      this.filterFlag = filterValue;
+    },
   },
 });
 </script>

@@ -1,4 +1,20 @@
 .container {
+  display: flex;
+  flex-flow: column;
+  gap: 30px;
+  padding: 20px 30px;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 25px;
+  width: 100%;
+}
+
+.card-box {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 30px;
@@ -10,4 +26,28 @@
   @media screen and (max-width: 786px){
     grid-template-columns: 1fr;
   }
+}
+
+.filter-button {
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  padding: 5px 50px;
+  background-color: #595959;
+  color: #F2E7AC;
+  font-weight: 600;
+  transition: opacity 1s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.selected {
+  background-color: #296b49;
+}
+
+.link {
+  text-align: center;
 }
