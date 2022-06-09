@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <h2 v-if="loading">Loading...</h2>
     <h1 class="title">{{ `Joke: ${joke.id}` }}</h1>
     <p class="main-text">{{ joke.joke }}</p>
     <p>{{ `Category: ${joke.category}` }}</p>
@@ -22,7 +23,7 @@ export default defineComponent({
       // @ts-ignore
       joke: (state) => state.dataSingle,
     }),
-    ...mapGetters("jokes", ["jokeData"]),
+    ...mapGetters("jokes", ["jokeData", "loading"]),
   },
 });
 </script>
