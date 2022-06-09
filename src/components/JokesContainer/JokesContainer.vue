@@ -90,11 +90,7 @@ export default defineComponent({
     this.$store.dispatch("jokes/getData");
   },
   computed: {
-    ...mapState("jokes", {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      jokes: (state) => state.data.jokes,
-    }),
+    ...mapState(["jokes"]),
     ...mapGetters("jokes", ["jokesData", "jokesFilter", "loading"]),
   },
   methods: {
