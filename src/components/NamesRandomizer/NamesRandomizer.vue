@@ -6,12 +6,12 @@
       </p>
     </div>
     <div v-else class="names-box">
-      <p v-for="{ id, name, surname } in names" :key="id">
+      <p v-for="{ id, name, surname } in allNames" :key="id">
         {{ name }} {{ surname }}
       </p>
     </div>
     <div class="result-box">
-      <p>{{ selectedName.name }} {{ selectedName.surname }}</p>
+      <p>{{ currentSelectedName.name }} {{ currentSelectedName.surname }}</p>
     </div>
     <ButtonPrimary v-if="notSelected.length > 0" :onClick="selectNewName"
       >Select new random name</ButtonPrimary
@@ -31,15 +31,8 @@ export default defineComponent({
   name: "NamesRandomizer",
   components: { ButtonPrimary },
   computed: {
-    ...mapState("names", {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      names: (state) => state.names,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      selectedName: (state) => state.selectedName,
-    }),
-    ...mapGetters("names", ["notSelected"]),
+    ...mapState(["names"]),
+    ...mapGetters("names", ["notSelected", "allNames", "currentSelectedName"]),
   },
   methods: {
     ...mapActions("names", ["selectNewName", "selectRandomName"]),

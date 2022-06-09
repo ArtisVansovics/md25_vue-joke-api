@@ -128,6 +128,12 @@ export default {
     notSelected(state: NamesState) {
       return state.names.filter((name) => !name.picked);
     },
+    allNames(state: NamesState) {
+      return state.names;
+    },
+    currentSelectedName(state: NamesState) {
+      return state.selectedName;
+    },
   },
   actions: {
     selectNewName(context: Context) {
