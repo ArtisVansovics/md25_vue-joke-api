@@ -13,6 +13,12 @@
     <div class="row" v-if="loading">
       <h2>Loading...</h2>
     </div>
+    <div
+      class="row"
+      v-if="filterFlag !== 'all' && jokesFilter(filterFlag).length === 0"
+    >
+      <h3>No jokes matching your query</h3>
+    </div>
     <div class="card-box">
       <JokesCard v-for="{ joke, id } in jokesFilter(filterFlag)" :key="id">
         <p>{{ joke }}</p>
