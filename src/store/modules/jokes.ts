@@ -1,4 +1,4 @@
-import { JokeData, JokesData } from "@/models/JokesModel";
+import { Flags, JokeData, JokesData } from "@/models/JokesModel";
 import { ActionContext } from "vuex";
 import { RootState } from "@/store";
 import axios from "axios";
@@ -19,6 +19,14 @@ export default {
   getters: {
     jokesData: (state: JokesState) => state.data,
     jokeData: (state: JokesState) => state.dataSingle,
+    jokesFilter: (state: JokesState) => (flag: string) => {
+      if (flag === "all") {
+        return state.data.jokes;
+      } else
+        return state.data.jokes.filter(
+          (joke) => joke.flags[flag as keyof Flags]
+        );
+    },
   },
   actions: {
     async getData(context: Context) {
